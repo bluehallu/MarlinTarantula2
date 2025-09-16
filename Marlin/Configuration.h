@@ -128,7 +128,7 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "TRAM REQS NO MESH!!"
+#define CUSTOM_MACHINE_NAME "Tram + level"
 //#define CONFIGURABLE_MACHINE_NAME // Add G-code M550 to set/report the machine name
 
 // Printer's unique ID, used by some programs to differentiate between machines.
@@ -699,7 +699,7 @@
 #if ENABLED(PIDTEMP)
   //#define MIN_POWER 0           // Min power to improve PID stability (0..PID_MAX).
                                   // Get the power from the temperature report ('M105' => @:nnn) and try P*2-20 to P*2-10.
-  //#define PID_DEBUG             // Print PID debug data to the serial port. Use 'M303 D' to enable/disable.
+  #define PID_DEBUG             // Print PID debug data to the serial port. Use 'M303 D' to enable/disable.
   //#define PID_PARAMS_PER_HOTEND // Use separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with G-code: M301 E[extruder number, 0-2]
 
@@ -710,9 +710,9 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    #define DEFAULT_Kp  11.20
-    #define DEFAULT_Ki   0.60
-    #define DEFAULT_Kd 52.53
+    #define DEFAULT_Kp    35
+    #define DEFAULT_Ki   3.3
+    #define DEFAULT_Kd  90
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -810,9 +810,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp  841.21
-  #define DEFAULT_bedKi   165.63
-  #define DEFAULT_bedKd  1068.13
+  #define DEFAULT_bedKp  85.51
+  #define DEFAULT_bedKi   8.03
+  #define DEFAULT_bedKd  607.08
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -1325,7 +1325,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 5000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -1661,7 +1661,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -5, -40, -1.2 }
+#define NOZZLE_TO_PROBE_OFFSET { -5, -40, -1.15 }
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1729,8 +1729,8 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-#define MULTIPLE_PROBING 3
-//#define EXTRA_PROBING    1
+#define MULTIPLE_PROBING 4
+#define EXTRA_PROBING    1
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
